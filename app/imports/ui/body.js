@@ -8,6 +8,11 @@ import './task.js';
 
 import './body.html';
 
+Template.body.onCreated(function bodyOnCreated() {
+  this.state = new ReactiveDict();
+  Meteor.subscribe('tasks');
+});
+
 Template.body.helpers({
   tasks() {
     // Show newest tasks at the top
@@ -25,12 +30,7 @@ Template.body.events({
     const text = target.text.value;
 
     // Insert a task into the collection
-    Tasks.insert({
-      text,
-      createdAt: new Date(), // current time
-      owner: Meteor.userId(),
-      username: Meteor.user().username,
-    });
+    Meteor.call('tasks.insert', text);
 
     // Clear form
     target.text.value = '';

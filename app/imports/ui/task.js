@@ -1,6 +1,5 @@
-import { Template } from 'meteor/templating';
-
 import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
 
 import './task.html';
 
@@ -9,7 +8,6 @@ Template.task.helpers({
     return this.owner === Meteor.userId();
   },
 });
-
 
 Template.task.events({
   'click .toggle-checked'() {

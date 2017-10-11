@@ -1,6 +1,8 @@
-import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
+
+
 export const Tasks = new Mongo.Collection('tasks');
 
 if (Meteor.isServer) {
@@ -52,7 +54,6 @@ Meteor.methods({
       // If the task is private, make sure only the owner can check it off
       throw new Meteor.Error('not-authorized');
     }
-
 
     Tasks.update(taskId, { $set: { checked: setChecked } });
   },
